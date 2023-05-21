@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 
-const { handleAddBanner, handleGetBanner, handleDeleteBanner } = require('../controllers/Banner');
+const { handleAddBanner, handleGetBanner, handleDeleteBanner,handleUpdateBanner } = require('../controllers/Banner');
 // const isAuthenticated = require('../utils/isAuthenticated');
 
 const storage = multer.diskStorage({
@@ -27,6 +27,7 @@ const type = upload.single('avatar');
 
 router.get('/banner', handleGetBanner);
 router.post('/banner', type, handleAddBanner);
+router.patch('/banner', type, handleUpdateBanner);
 router.post('/deleteBanner', handleDeleteBanner);
 
 

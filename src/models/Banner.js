@@ -1,9 +1,8 @@
 const { Schema, model } = require('mongoose');
 
 const BannerSchema = new Schema({
-	avatar: {
+	news: {
 		type: String,
-		default: 'default.png',
 	},
 
 });

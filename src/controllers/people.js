@@ -81,11 +81,21 @@ const handleDeleteTeam = async (req, res) => {
 
 const handleUpdateTeam = async (req, res) => {
 	try {
-		const result = await updateTeam(req.params.id, {
-			price: req.body.price,
-			description: req.body.description,
-			avatar: req.file.filename,
-		});
+		let result;
+		if (req.file && req.file.filename) {
+			result = await updateTeam(req.params.id, {
+				price: req.body.price,
+				description: req.body.description,
+				name: req.body.name,
+				avatar: req.file.filename,
+			});
+		} else {
+			result = await updateTeam(req.params.id, {
+				price: req.body.price,
+				description: req.body.description,
+				name: req.body.name,
+			});
+		}
 
 		res.status(HttpStatusCode.OK).send(result);
 	} catch (error) {

@@ -43,7 +43,18 @@ const nodemailer = require('nodemailer');
 const handleAddBanner = async (req, res) => {
 	try {
 		console.log('req: ', req.body);
-		const result = await createBanner({ avatar: req.file.filename });
+		const result = await createBanner({ news: req.body.news });
+
+		res.status(HttpStatusCode.OK).send(result);
+	} catch (error) {
+		res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).send({ error });
+	}
+};
+
+const handleUpdateBanner = async (req, res) => {
+	try {
+		console.log('req: ', req.body);
+		const result = await updateBanner(req.body.id, { news: req.body.news });
 
 		res.status(HttpStatusCode.OK).send(result);
 	} catch (error) {
@@ -82,4 +93,5 @@ module.exports = {
 	handleAddBanner,
 	handleGetBanner,
 	handleDeleteBanner,
+	handleUpdateBanner,
 };
